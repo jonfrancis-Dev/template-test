@@ -9,17 +9,16 @@ const loader = document.getElementById('loader');
 
 let apiQuotes = [];
 
-
-//Show Loading
-function loading() {
+function showLoadingSpinner() {
     loader.hidden = false;
     quoteContainer.hidden = true;
 }
-// Hide Loader
-function complete() {
+
+function hideLoadingSpinner() {
     loader.hidden = true;
     quoteContainer.hidden = false;
 }
+
 //Show New Quote
 function newQuote() {
     loading();
@@ -40,12 +39,12 @@ function newQuote() {
     }
     //Set Quote, Hide Loader
     quoteText.textContent =quote.text;
-    complete();
+    hideLoadingSpinner();
 }
 
 //Get quotes from API
 async function getQuotes() {
-    loading();
+    showLoadingSpinner();
     const apiUrl = 'https://type.fit/api/quotes';
     try {
         const response = await fetch(apiUrl);
@@ -55,7 +54,6 @@ async function getQuotes() {
         //Catch Error Here
     }
 }
-
 
 //Tweet a Quote
 function tweetQuote() {
